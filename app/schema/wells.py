@@ -5,4 +5,4 @@ class WellSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Well
         load_instance = True
-        fields = ('oil', 'gas', 'brine')
+        fields = ('oil', 'gas', 'brine', 'county','well_number')

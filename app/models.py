@@ -8,9 +8,13 @@ class Well(db.Model):
     oil = db.Column(db.Float, nullable=False)
     gas = db.Column(db.Float, nullable=False)
     brine = db.Column(db.Float, nullable=False)
+    county = db.Column(db.String(50), nullable=True) 
+    well_number = db.Column(db.String(50),nullable=True)
 
-    def __init__(self, api_well_number, production_year, quarter, owner_name, county, township, well_name, well_number, oil, gas, brine, days):
+    def __init__(self, api_well_number, county, well_number, oil, gas, brine):
         self.api_well_number = api_well_number
         self.oil = oil
         self.gas = gas
         self.brine = brine
+        self.county = county
+        self.well_number = well_number

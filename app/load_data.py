@@ -15,7 +15,7 @@ try:
     df.columns = df.columns.str.lower().str.replace(' ', '_')
     if 'quarter_1,2,3,4' in df.columns:
         df.rename(columns={'quarter_1,2,3,4': 'quarter'}, inplace=True)
-    annual_data = df.groupby('api_well__number').agg({
+    annual_data = df.groupby(['api_well__number','county','well_number']).agg({
         'oil': 'sum',
         'gas': 'sum',
         'brine': 'sum',
