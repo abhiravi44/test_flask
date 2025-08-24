@@ -22,7 +22,7 @@ try:
     }).reset_index()
 
     # Add other necessary columns if needed
-    # annual_data['production_year'] = df['production_year'].unique()[0]        
+    annual_data['production_year'] = df['production_year'].unique()[0]        
     annual_data.to_sql(table_name, con=engine, if_exists='append', index=False)
     print(f"Data loaded into {database_name} in table {table_name}")
 except PermissionError as pe:

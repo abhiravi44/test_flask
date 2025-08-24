@@ -12,15 +12,21 @@ def get_products():
         well = request.args.get('well')
         county = request.args.get('county')
         well_number = request.args.get('well_number')
+        year = request.args.get('year')
+        oil_min = request.args.get('oil_min')
+        oil_max = request.args.get('oil_max')
         limit = request.args.get('limit', 10, type=int)
         offset = request.args.get('offset', 0, type=int)
         query = Well.query
-        if well:        
+        if well or county:        
             all_wells = query.filter_by(api_well__number=well)
-        if county:
-            all_wells = query.filter_by(county=county)
-        if well_number:
-            all_wells = query.filter_by(well_number=well_number)
+            if county:
+                all_wells = all_wells.filter_by(county=county)
+        if well_number and year:
+            all_wells = query.filter_by(well_number=well_number, production_year=year)
+        if oil_max and oil_min:
+            all_wells = query.filter(Well.oil>=oil_min,Well.oil<=oil_max)
+            all_wells = all_wells.distinct('well_number')
         paginated_wells = all_wells.limit(limit).offset(offset)
         result = wells_schema.dump(paginated_wells.all())
         return jsonify(paginated_response(result, paginated_wells))

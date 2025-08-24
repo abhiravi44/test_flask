@@ -10,6 +10,7 @@ class Well(db.Model):
     brine = db.Column(db.Float, nullable=False)
     county = db.Column(db.String(50), nullable=True) 
     well_number = db.Column(db.String(50),nullable=True)
+    production_year = db.Column(db.Integer(), nullable=True)
 
     def __init__(self, api_well_number, county, well_number, oil, gas, brine):
         self.api_well_number = api_well_number

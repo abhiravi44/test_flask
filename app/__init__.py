@@ -19,4 +19,4 @@ ma = Marshmallow(app)
 from app.wells import wells_bp
 app.register_blueprint(wells_bp, url_prefix='/wells')
 
-from app.wells import views
+# from app.wells import views
